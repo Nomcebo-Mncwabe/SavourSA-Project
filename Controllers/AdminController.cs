@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SavourSA_Project.Models.ViewModels;
+using static SavourSA_Project.Models.ViewModels.DashboardViewModel;
 
 namespace SavourSA_Project.Controllers
 {
@@ -11,7 +13,15 @@ namespace SavourSA_Project.Controllers
         {
             public ActionResult Dashboard()
             {
-                return View();
+                DashboardViewModel model = new DashboardViewModel
+                {
+                    TotalUsers = 0,
+                    TotalRecipes = 0,
+                    TotalCategories = 0,
+                    TotalComments = 0
+                };
+
+                return View(model);
             }
 
             public ActionResult Recipes()

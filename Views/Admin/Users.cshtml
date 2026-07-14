@@ -1,7 +1,129 @@
 ﻿
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Manage Users";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>Manage Users</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2 style="font-weight:700;">Manage Members</h2>
+
+        <p class="text-muted">
+            View, edit and manage registered members.
+        </p>
+
+    </div>
+
+    <button class="btn btn-success btn-lg">
+
+        <i class="fa fa-user-plus"></i>
+
+        Add Administrator
+
+    </button>
+
+</div>
+
+<div class="search-box">
+
+    <input type="text"
+           placeholder="Search members..." />
+
+</div>
+
+<div class="mb-4">
+
+    <button class="btn btn-success">All</button>
+
+    <button class="btn btn-default">Members</button>
+
+    <button class="btn btn-default">Administrators</button>
+
+    <button class="btn btn-default">Suspended</button>
+
+</div>
+
+<div class="row">
+    <div class="col-lg-4">
+
+        <div class="user-card">
+
+            <img src="~/Content/Images/Users/user1.png"
+                 class="user-image" />
+
+            <div class="user-body">
+
+                <h3>Nomcebo Mncwabe</h3>
+
+                <p>
+
+                    <i class="fa fa-map-marker"></i>
+
+                    KwaZulu-Natal
+
+                </p>
+
+                <span class="status-active">
+
+                    Member
+
+                </span>
+
+                <hr />
+
+                <p>
+
+                    Joined:
+
+                    15 July 2026
+
+                </p>
+
+                <p>
+
+                    Recipes: 12
+
+                </p>
+
+                <p>
+
+                    Favourites: 28
+
+                </p>
+
+                <div class="text-center">
+
+                    <button class="btn btn-info btn-sm">
+
+                        <i class="fa fa-eye"></i>
+
+                    </button>
+
+                    <button class="btn btn-warning btn-sm">
+
+                        <i class="fa fa-pencil"></i>
+
+                    </button>
+
+                    <button class="btn btn-secondary btn-sm">
+
+                        <i class="fa fa-ban"></i>
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm">
+
+                        <i class="fa fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>

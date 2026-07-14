@@ -4,5 +4,378 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>Settings</h2>
+<div class="container-fluid">
+
+    <div class="row mb-4">
+
+        <div class="col-md-8">
+
+            <h2 style="font-weight:700;">
+                <i class="fa fa-cog text-success"></i>
+                Platform Settings
+            </h2>
+
+            <p class="text-muted">
+                Configure your Recipe Sharing Platform.
+            </p>
+
+        </div>
+
+        <div class="col-md-4 text-right">
+
+            <button class="btn btn-success btn-lg">
+
+                <i class="fa fa-save"></i>
+
+                Save Changes
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <div class="row">
+
+        <!-- Logo Card -->
+
+        <div class="col-md-4">
+
+            <div class="settings-box text-center">
+
+                <h4>
+
+                    <i class="fa fa-image text-success"></i>
+
+                    Platform Logo
+
+                </h4>
+
+                <hr />
+
+                <img src="~/Content/Images/logo.png"
+                     class="logo-preview" />
+
+                <br /><br />
+
+                <input type="file"
+                       class="form-control" />
+
+            </div>
+
+        </div>
+
+        <!-- Platform Details -->
+
+        <div class="col-md-8">
+
+            <div class="settings-box">
+
+                <h4>
+
+                    <i class="fa fa-building text-success"></i>
+
+                    Platform Information
+
+                </h4>
+
+                <hr />
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Platform Name</label>
+
+                        <input class="form-control"
+                               value="SavourSA" />
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label>Email</label>
+
+                        <input class="form-control"
+                               value="admin@savoursa.co.za" />
+
+                    </div>
+
+                </div>
+
+                <br />
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <label>Contact Number</label>
+
+                        <input class="form-control"
+                               value="031 555 1234" />
+
+                    </div>
+
+                    <div class="col-md-6">
+
+                        <label>Province</label>
+
+                        <select class="form-control">
+
+                            <option>KwaZulu-Natal</option>
+                            <option>Gauteng</option>
+                            <option>Western Cape</option>
+                            <option>Eastern Cape</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+    <!-- Upload Settings -->
+
+    <div class="settings-box">
+
+        <h4>
+
+            <i class="fa fa-upload text-success"></i>
+
+            Image Upload Settings
+
+        </h4>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <label>Maximum File Size</label>
+
+                <select class="form-control">
+
+                    <option>2 MB</option>
+                    <option selected>5 MB</option>
+                    <option>10 MB</option>
+
+                </select>
+
+            </div>
+
+            <div class="col-md-8">
+
+                <label>Allowed File Types</label>
+
+                <br /><br />
+
+                <label class="checkbox-inline">
+
+                    <input type="checkbox" checked />
+
+                    JPG
+
+                </label>
+
+                <label class="checkbox-inline">
+
+                    <input type="checkbox" checked />
+
+                    PNG
+
+                </label>
+
+                <label class="checkbox-inline">
+
+                    <input type="checkbox" checked />
+
+                    JPEG
+
+                </label>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+   
+    <!-- Community Guidelines -->
+
+    <div class="settings-box">
+
+        <h4>
+
+            <i class="fa fa-shield-alt text-success"></i>
+
+            Community Guidelines
+
+        </h4>
+
+        <p class="text-muted">
+
+            These rules help keep the SavourSA community friendly and respectful.
+
+        </p>
+
+        <hr />
+
+        <div class="guideline-item">
+
+            <div class="guideline-icon">
+
+                <i class="fa fa-check-circle"></i>
+
+            </div>
+
+            <div>
+
+                <h5>Respect Other Members</h5>
+
+                <p>
+                    Be respectful when commenting or reviewing recipes.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="guideline-item">
+
+            <div class="guideline-icon">
+
+                <i class="fa fa-camera"></i>
+
+            </div>
+
+            <div>
+
+                <h5>Original Content Only</h5>
+
+                <p>
+                    Upload recipes and food images that you own or have permission to share.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="guideline-item">
+
+            <div class="guideline-icon">
+
+                <i class="fa fa-ban"></i>
+
+            </div>
+
+            <div>
+
+                <h5>No Offensive Content</h5>
+
+                <p>
+                    Hate speech, spam and abusive language are not permitted.
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="guideline-item">
+
+            <div class="guideline-icon">
+
+                <i class="fa fa-image"></i>
+
+            </div>
+
+            <div>
+
+                <h5>Food Related Images</h5>
+
+                <p>
+                    Images should clearly represent the recipe being shared.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <br />
+
+    <!-- Theme -->
+
+    <div class="settings-box">
+
+        <h4>
+
+            <i class="fa fa-paint-brush text-success"></i>
+
+            Appearance
+
+        </h4>
+
+        <hr />
+
+        <div class="row">
+
+            <div class="col-md-4">
+
+                <div class="theme-card active-theme">
+
+                    🟢
+
+                    <h4>Green</h4>
+
+                    <small>Default Theme</small>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="theme-card">
+
+                    ⚪
+
+                    <h4>Light</h4>
+
+                    <small>Minimal Design</small>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-4">
+
+                <div class="theme-card">
+
+                    ⚫
+
+                    <h4>Dark</h4>
+
+                    <small>Night Mode</small>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 

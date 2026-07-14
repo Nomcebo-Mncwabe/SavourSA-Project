@@ -4,4 +4,204 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>Manage Comments</h2>
+<div class="row">
+
+    <div class="col-md-8">
+
+        <h2 style="font-weight:700;">Comment Moderation</h2>
+
+        <p class="text-muted">
+            Review comments posted by members.
+        </p>
+
+    </div>
+
+    <div class="col-md-4 text-right">
+
+        <button class="btn btn-success btn-lg">
+
+            <i class="fa fa-download"></i>
+
+            Export Comments
+
+        </button>
+
+    </div>
+
+</div>
+
+<br />
+
+<div class="search-box">
+
+    <input class="form-control"
+           placeholder="Search comments..." />
+
+</div>
+
+<br />
+
+<div class="btn-group">
+
+    <button class="btn btn-success">
+
+        All
+
+    </button>
+
+    <button class="btn btn-default">
+
+        Approved
+
+    </button>
+
+    <button class="btn btn-default">
+
+        Pending
+
+    </button>
+
+    <button class="btn btn-default">
+
+        Reported
+
+    </button>
+
+</div>
+
+<hr />
+
+<div class="comment-card">
+
+    <div class="comment-header">
+
+        <img src="~/Content/Images/Users/user1.png"
+             class="comment-user-image" />
+
+        <div>
+
+            <h4>
+
+                Nomcebo Mncwabe
+
+            </h4>
+
+            <small class="text-muted">
+
+                Commented on:
+                Bunny Chow
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <p class="comment-text">
+
+        This recipe was absolutely delicious!
+        I tried it with homemade bread and my family loved it.
+
+    </p>
+
+    <span class="status-active">
+
+        Approved
+
+    </span>
+
+    <hr />
+
+    <button class="btn btn-info">
+
+        <i class="fa fa-eye"></i>
+
+        View Recipe
+
+    </button>
+
+    <button class="btn btn-warning">
+
+        <i class="fa fa-eye-slash"></i>
+
+        Hide
+
+    </button>
+
+    <button class="btn btn-danger">
+
+        <i class="fa fa-trash"></i>
+
+        Delete
+
+    </button>
+
+</div>
+
+<br />
+
+<div class="comment-card">
+
+    <div class="comment-header">
+
+        <img src="~/Content/Images/Users/user2.png"
+             class="comment-user-image" />
+
+        <div>
+
+            <h4>
+
+                Sarah Smith
+
+            </h4>
+
+            <small class="text-muted">
+
+                Commented on:
+                Malva Pudding
+
+            </small>
+
+        </div>
+
+    </div>
+
+    <p class="comment-text">
+
+        I think the sugar measurements should be reduced slightly.
+
+    </p>
+
+    <span class="status-active">
+
+        Approved
+
+    </span>
+
+    <hr />
+
+    <button class="btn btn-info">
+
+        <i class="fa fa-eye"></i>
+
+        View Recipe
+
+    </button>
+
+    <button class="btn btn-warning">
+
+        <i class="fa fa-eye-slash"></i>
+
+        Hide
+
+    </button>
+
+    <button class="btn btn-danger">
+
+        <i class="fa fa-trash"></i>
+
+        Delete
+
+    </button>
+
+</div>

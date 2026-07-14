@@ -4,5 +4,400 @@
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>Reports</h2>
+<div class="row">
+
+    <div class="col-md-8">
+
+        <h2 style="font-weight:bold;">Reports & Analytics</h2>
+
+        <p class="text-muted">
+            Monitor recipes, members and platform activity.
+        </p>
+
+    </div>
+
+    <div class="col-md-4 text-right">
+
+        <button class="btn btn-success btn-lg">
+
+            <i class="fa fa-download"></i>
+
+            Download Report
+
+        </button>
+
+    </div>
+
+</div>
+
+<hr />
+
+<!-- Statistics -->
+
+<div class="row">
+
+    <div class="col-md-3">
+
+        <div class="report-card">
+
+            <h2>245</h2>
+
+            <p>Total Recipes</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="report-card">
+
+            <h2>182</h2>
+
+            <p>Members</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="report-card">
+
+            <h2>1483</h2>
+
+            <p>Comments</p>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-3">
+
+        <div class="report-card">
+
+            <h2>8</h2>
+
+            <p>Categories</p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br />
+
+<!-- Charts -->
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="analytics-card">
+
+            <h3>Recipes by Category</h3>
+
+            <hr />
+
+            <canvas id="categoryChart" height="250"></canvas>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="analytics-card">
+
+            <h3>Monthly Recipe Uploads</h3>
+
+            <hr />
+
+            <canvas id="recipeChart" height="250"></canvas>
+
+        </div>
+
+    </div>
+
+</div>
+
+<br />
+
+<div class="row">
+
+    <div class="col-md-6">
+
+        <div class="analytics-card">
+
+            <h3>Top Contributors</h3>
+
+            <hr />
+
+            <table class="table table-hover">
+
+                <thead>
+
+                    <tr>
+
+                        <th>Member</th>
+
+                        <th>Recipes</th>
+
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr>
+
+                        <td>Nomcebo</td>
+
+                        <td>24</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Sarah</td>
+
+                        <td>20</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>Thando</td>
+
+                        <td>18</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td>John</td>
+
+                        <td>15</td>
+
+                    </tr>
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+    <div class="col-md-6">
+
+        <div class="analytics-card">
+
+            <h3>Recent Activity</h3>
+
+            <hr />
+
+            <ul class="list-group">
+
+                <li class="list-group-item">
+
+                    ✔ Bunny Chow recipe approved
+
+                </li>
+
+                <li class="list-group-item">
+
+                    ✔ New member registered
+
+                </li>
+
+                <li class="list-group-item">
+
+                    ✔ Comment removed
+
+                </li>
+
+                <li class="list-group-item">
+
+                    ✔ Cape Malay category added
+
+                </li>
+
+                <li class="list-group-item">
+
+                    ✔ Braai recipe featured
+
+                </li>
+
+            </ul>
+
+        </div>
+
+    </div>
+
+</div>
+
+@section scripts{
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+
+var category = document.getElementById('categoryChart');
+
+new Chart(category, {
+
+    type: 'doughnut',
+
+    data: {
+
+        labels: [
+
+            'Traditional',
+
+            'Braai',
+
+            'Desserts',
+
+            'Cape Malay',
+
+            'Seafood',
+
+            'Street Food'
+
+        ],
+
+        datasets: [{
+
+            data: [
+
+                45,
+
+                35,
+
+                20,
+
+                18,
+
+                15,
+
+                28
+
+            ],
+
+            backgroundColor: [
+
+                '#43A047',
+
+                '#66BB6A',
+
+                '#FFA726',
+
+                '#26A69A',
+
+                '#42A5F5',
+
+                '#EF5350'
+
+            ]
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false
+
+    }
+
+});
+
+var uploads = document.getElementById('recipeChart');
+
+new Chart(uploads, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: [
+
+            'Jan',
+
+            'Feb',
+
+            'Mar',
+
+            'Apr',
+
+            'May',
+
+            'Jun',
+
+            'Jul'
+
+        ],
+
+        datasets: [{
+
+            label: 'Recipes Uploaded',
+
+            data: [
+
+                12,
+
+                24,
+
+                18,
+
+                30,
+
+                28,
+
+                42,
+
+                37
+
+            ],
+
+            backgroundColor: '#43A047'
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true
+
+            }
+
+        }
+
+    }
+
+});
+
+    </script>
+
+}
+
+
+
+
+
+
+
 

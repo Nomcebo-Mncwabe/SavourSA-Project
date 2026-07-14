@@ -125,6 +125,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ViewModels\DashboardViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -145,6 +146,17 @@
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\admin.css" />
+    <Content Include="Content\Images\Categories\beverages.jpg" />
+    <Content Include="Content\Images\Categories\braai.jpg" />
+    <Content Include="Content\Images\Categories\camp_malay.jpg" />
+    <Content Include="Content\Images\Categories\dessert.jpg" />
+    <Content Include="Content\Images\Categories\street-food.jpeg" />
+    <Content Include="Content\Images\Categories\traditional.jpg" />
+    <Content Include="Content\Images\Categories\vegan.jpg" />
+    <Content Include="Content\Images\logo.png" />
+    <Content Include="Content\Images\Recipes\bunnychow.jpg" />
+    <Content Include="Content\Images\Users\user1.png" />
+    <Content Include="Content\Images\Users\user2.png" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -190,7 +202,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

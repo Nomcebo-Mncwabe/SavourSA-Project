@@ -1,6 +1,124 @@
 ﻿@{
-    ViewBag.Title = "Recipes";
+    ViewBag.Title = "Recipe Management";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<h2>Manage Recipes</h2>
+<div class="d-flex justify-content-between align-items-center mb-4">
+
+    <div>
+
+        <h2 style="font-weight:700;">Recipe Management</h2>
+
+        <p class="text-muted">
+            Review, edit and moderate recipes submitted by members.
+        </p>
+
+    </div>
+
+    <button class="btn btn-success btn-lg">
+
+        <i class="fa fa-plus"></i>
+
+        Add Recipe
+
+    </button>
+
+</div>
+
+<div class="search-box">
+
+    <input type="text"
+           placeholder="Search recipes..." />
+
+</div>
+
+<div class="mb-4">
+
+    <button class="btn btn-success">All</button>
+
+    <button class="btn btn-default">Pending</button>
+
+    <button class="btn btn-default">Approved</button>
+
+    <button class="btn btn-default">Rejected</button>
+
+</div>
+
+<div class="row">
+    <div class="col-md-6 col-lg-4">
+
+        <div class="recipe-card">
+
+            <img src="~/Content/Images/Recipes/bunnychow.jpg"
+                 class="recipe-image" />
+
+            <div class="recipe-body">
+
+                <h3>Bunny Chow</h3>
+
+                <p>
+
+                    <strong>Author:</strong>
+
+                    Nomcebo
+
+                </p>
+
+                <p>
+
+                    <strong>Category:</strong>
+
+                    Street Food
+
+                </p>
+
+                <p>
+
+                    <strong>Difficulty:</strong>
+
+                    Easy
+
+                </p>
+
+                <span class="status-active">
+
+                    Approved
+
+                </span>
+
+                <hr />
+
+                <div class="text-center">
+
+                    <button class="btn btn-info btn-sm">
+
+                        <i class="fa fa-eye"></i>
+
+                    </button>
+
+                    <button class="btn btn-warning btn-sm">
+
+                        <i class="fa fa-pencil"></i>
+
+                    </button>
+
+                    <button class="btn btn-success btn-sm">
+
+                        <i class="fa fa-check"></i>
+
+                    </button>
+
+                    <button class="btn btn-danger btn-sm">
+
+                        <i class="fa fa-trash"></i>
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
