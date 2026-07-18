@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<SavourSA_Project.Models.Recipe>
+
+@{
     ViewBag.Title = "Recipe Management";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
@@ -10,115 +12,172 @@
         <h2 style="font-weight:700;">Recipe Management</h2>
 
         <p class="text-muted">
-            Review, edit and moderate recipes submitted by members.
+            Manage recipes submitted by community members.
         </p>
 
     </div>
 
-    <button class="btn btn-success btn-lg">
+</div>
 
-        <i class="fa fa-plus"></i>
+<div class="alert alert-info">
 
-        Add Recipe
+    <i class="fa fa-info-circle"></i>
 
-    </button>
+    Recipes are submitted by registered members. Administrators can review, edit and remove recipes from this page.
 
 </div>
 
-<div class="search-box">
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
 
-    <input type="text"
-           placeholder="Search recipes..." />
+        @TempData["Success"]
 
-</div>
+    </div>
+}
 
-<div class="mb-4">
+@using (Html.BeginForm("Recipes", "Admin", FormMethod.Get))
+{
+    <div class="row mb-4">
 
-    <button class="btn btn-success">All</button>
+        <div class="col-md-5">
 
-    <button class="btn btn-default">Pending</button>
+            <input type="text"
+                   name="search"
+                   class="form-control"
+                   placeholder="Search recipe title..." />
 
-    <button class="btn btn-default">Approved</button>
+        </div>
 
-    <button class="btn btn-default">Rejected</button>
+        <div class="col-md-3">
 
-</div>
+            <button class="btn btn-success">
 
-<div class="row">
-    <div class="col-md-6 col-lg-4">
+                <i class="fa fa-search"></i>
 
-        <div class="recipe-card">
+                Search
 
-            <img src="~/Content/Images/Recipes/bunnychow.jpg"
-                 class="recipe-image" />
-
-            <div class="recipe-body">
-
-                <h3>Bunny Chow</h3>
-
-                <p>
-
-                    <strong>Author:</strong>
-
-                    Nomcebo
-
-                </p>
-
-                <p>
-
-                    <strong>Category:</strong>
-
-                    Street Food
-
-                </p>
-
-                <p>
-
-                    <strong>Difficulty:</strong>
-
-                    Easy
-
-                </p>
-
-                <span class="status-active">
-
-                    Approved
-
-                </span>
-
-                <hr />
-
-                <div class="text-center">
-
-                    <button class="btn btn-info btn-sm">
-
-                        <i class="fa fa-eye"></i>
-
-                    </button>
-
-                    <button class="btn btn-warning btn-sm">
-
-                        <i class="fa fa-pencil"></i>
-
-                    </button>
-
-                    <button class="btn btn-success btn-sm">
-
-                        <i class="fa fa-check"></i>
-
-                    </button>
-
-                    <button class="btn btn-danger btn-sm">
-
-                        <i class="fa fa-trash"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
+            </button>
 
         </div>
 
     </div>
-</div>
+}
+
+@if (!Model.Any())
+{
+    <div class="alert alert-warning text-center">
+
+        <h4>No Recipes Found</h4>
+
+        <p>
+            No recipes have been submitted yet.
+        </p>
+
+    </div>
+}
+else
+{
+
+    <table class="table table-bordered table-hover">
+
+        <thead class="thead-dark">
+
+            <tr>
+
+                <th>Image</th>
+
+                <th>Recipe</th>
+
+                <th>Category</th>
+
+                <th>Author</th>
+
+                <th>Date Created</th>
+
+                <th width="180">Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var recipe in Model)
+            {
+
+                <tr>
+
+                    <td width="100">
+
+                        @if (!string.IsNullOrEmpty(recipe.ImageUrl))
+                        {
+                            <img src="@Url.Content(recipe.ImageUrl)"
+                                 style="width:80px;height:80px;object-fit:cover;border-radius:8px;" />
+                        }
+                        else
+                        {
+                            <img src="~/Content/Images/Recipes/default-recipe.jpg"
+                                 style="width:80px;height:80px;object-fit:cover;border-radius:8px;" />
+                        }
+
+                    </td>
+
+                    <td>
+
+                        <strong>@recipe.Title</strong>
+
+                    </td>
+
+                    <td>
+
+                        @(recipe.Category != null ? recipe.Category.Name : "No Category")
+
+                    </td>
+
+                    <td>
+
+                        @(recipe.User != null ? recipe.User.FirstName + " " + recipe.User.LastName : "Unknown")
+
+                    </td>
+
+                    <td>
+
+                        @recipe.DateCreated.ToShortDateString()
+
+                    </td>
+
+                    <td>
+
+                        <a href="@Url.Action("ViewRecipe","Admin",new{id=recipe.RecipeId})"
+                           class="btn btn-info btn-sm">
+
+                            <i class="fa fa-eye"></i>
+
+                        </a>
+
+                        <a href="@Url.Action("EditRecipe","Admin",new{id=recipe.RecipeId})"
+                           class="btn btn-warning btn-sm">
+
+                            <i class="fa fa-pencil"></i>
+
+                        </a>
+
+                        <a href="@Url.Action("DeleteRecipe","Admin",new{id=recipe.RecipeId})"
+                           class="btn btn-danger btn-sm">
+
+                            <i class="fa fa-trash"></i>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+}
