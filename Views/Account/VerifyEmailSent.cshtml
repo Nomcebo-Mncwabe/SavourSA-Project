@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Check Your Email";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Verify Your Email | SavourSA</title>
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Account.css" />
+</head>
+<body class="account-body">
+    <div class="account-card notice-card">
+        <div class="notice-icon">📧</div>
+        <h1>Check Your Inbox</h1>
+        <p>We've sent a verification link to <b>@ViewBag.Email</b>.</p>
+        <p class="subtitle">Click the link in that email to activate your SavourSA account. It may take a minute to arrive — check spam/junk if you don't see it.</p>
+
+        @if (ViewBag.Resent == true)
+        {
+            <p class="success-text">Verification email resent!</p>
+        }
+
+        @using (Html.BeginForm("ResendVerification", "Account", FormMethod.Post))
+        {
+            <input type="hidden" name="email" value="@ViewBag.Email" />
+            <button type="submit" class="btn-primary-wide">Resend Email</button>
+        }
+        @Html.ActionLink("Back to Login", "Login", "Account", null, new { @class = "back-link" })
+    </div>
+</body>
+</html>

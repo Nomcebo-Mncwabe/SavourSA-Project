@@ -1,0 +1,17 @@
+﻿@{ ViewBag.Title = "Email Confirmed"; Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Account.css" />
+</head>
+<body class="account-body">
+    <div class="account-card notice-card">
+        <div class="notice-icon">✅</div>
+        <h1>Email Verified!</h1>
+        <p>Your SavourSA account is now active. You can log in and start sharing recipes.</p>
+        @Html.ActionLink("Go to Login", "Login", "Account", null, new { @class = "btn-primary-wide" })
+    </div>
+</body>
+</html>

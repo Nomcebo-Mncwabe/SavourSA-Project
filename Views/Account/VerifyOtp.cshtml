@@ -1,0 +1,54 @@
+﻿@model SavourSA_Project.Models.VerifyOtpViewModel
+@{ ViewBag.Title = "Verify Code"; Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Verify Code | SavourSA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/Content/Account.css" />
+</head>
+<body class="account-body">
+    <div class="account-card notice-card" style="text-align:left;max-width:460px;">
+        <h1>Enter Verification Code</h1>
+        <p class="subtitle">We sent a 6-digit code to <b>@Model.Email</b>. It expires in 10 minutes.</p>
+
+        @if (ViewBag.Resent == true)
+        {
+            <p class="success-text">A new code has been sent!</p>
+        }
+
+        @using (Html.BeginForm("VerifyOtp", "Account", FormMethod.Post, new { id = "otpForm" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.Email)
+            @Html.ValidationSummary(true, "", new { @class = "text-danger", role = "alert" })
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Otp)
+                @Html.TextBoxFor(m => m.Otp, new { @class = "form-control otp-input", placeholder = "000000", maxlength = "6", inputmode = "numeric", pattern = "[0-9]*", autocomplete = "one-time-code", autofocus = "autofocus" })
+                @Html.ValidationMessageFor(m => m.Otp, "", new { @class = "field-error" })
+            </div>
+
+            <button type="submit" class="btn-primary-wide">Verify Code</button>
+        }
+
+        <div class="resend-box" style="margin-top:16px;">
+            Didn't get the code?
+            @using (Html.BeginForm("ResendOtp", "Account", FormMethod.Post, new { style = "display:inline" }))
+            {
+                <input type="hidden" name="email" value="@Model.Email" />
+                <button type="submit" class="link-btn">Resend Code</button>
+            }
+        </div>
+        @Html.ActionLink("← Back to Login", "Login", "Account", null, new { @class = "back-link" })
+    </div>
+
+    <script>
+        document.querySelector('.otp-input').addEventListener('input', function (e) {
+            this.value = this.value.replace(/\D/g, '').slice(0, 6);
+        });
+    </script>
+</body>
+</html>

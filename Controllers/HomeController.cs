@@ -26,5 +26,16 @@ namespace SavourSA_Project.Controllers
 
             return View();
         }
+        [AllowAnonymous]
+        public ActionResult Popia()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public ActionResult Privacy()
+        {
+            return View();
+        }
     }
 }
