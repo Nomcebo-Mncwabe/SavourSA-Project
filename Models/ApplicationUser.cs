@@ -23,11 +23,16 @@ namespace SavourSA_Project.Models
         [StringLength(100)]
         public string Province { get; set; }
 
+        [StringLength(500)]
+        public string Bio { get; set; }
+
         public string ProfilePictureUrl { get; set; }
 
         public bool AcceptedPopia { get; set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.Now;
+
+        public virtual ICollection<Recipe> Recipes { get; set; }
 
         public virtual ICollection<Favourite> Favourites { get; set; }
     }
