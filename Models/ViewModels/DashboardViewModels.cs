@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
+using SavourSA_Project.Models;
 
 namespace SavourSA_Project.Models.ViewModels
 {
@@ -13,6 +11,20 @@ namespace SavourSA_Project.Models.ViewModels
 
         public int TotalCategories { get; set; }
 
-        public int TotalComments { get; set; }
+        public int TotalFavourites { get; set; }
+
+        public List<Recipe> RecentRecipes { get; set; }
+
+        public List<CategorySummary> CategorySummary { get; set; }
+        public List<ApplicationUser> LatestUsers { get; set; }
+
+        public List<Recipe> LatestRecipes { get; set; }
+    }
+
+    public class CategorySummary
+    {
+        public string CategoryName { get; set; }
+
+        public int RecipeCount { get; set; }
     }
 }

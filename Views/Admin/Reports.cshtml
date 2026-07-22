@@ -1,4 +1,5 @@
-﻿
+﻿@model SavourSA_Project.Models.ViewModels.DashboardViewModel
+
 @{
     ViewBag.Title = "Reports";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
@@ -18,13 +19,14 @@
 
     <div class="col-md-4 text-right">
 
-        <button class="btn btn-success btn-lg">
+        <a href="@Url.Action("DownloadReport","Admin")"
+           class="btn btn-success btn-lg">
 
             <i class="fa fa-download"></i>
 
             Download Report
 
-        </button>
+        </a>
 
     </div>
 
@@ -32,15 +34,13 @@
 
 <hr />
 
-<!-- Statistics -->
-
 <div class="row">
 
     <div class="col-md-3">
 
         <div class="report-card">
 
-            <h2>245</h2>
+            <h2>@Model.TotalRecipes</h2>
 
             <p>Total Recipes</p>
 
@@ -52,7 +52,7 @@
 
         <div class="report-card">
 
-            <h2>182</h2>
+            <h2>@Model.TotalUsers</h2>
 
             <p>Members</p>
 
@@ -64,9 +64,9 @@
 
         <div class="report-card">
 
-            <h2>1483</h2>
+            <h2>@Model.TotalFavourites</h2>
 
-            <p>Comments</p>
+            <p>Favourites</p>
 
         </div>
 
@@ -76,7 +76,7 @@
 
         <div class="report-card">
 
-            <h2>8</h2>
+            <h2>@Model.TotalCategories</h2>
 
             <p>Categories</p>
 
@@ -88,8 +88,6 @@
 
 <br />
 
-<!-- Charts -->
-
 <div class="row">
 
     <div class="col-md-6">
@@ -100,7 +98,53 @@
 
             <hr />
 
-            <canvas id="categoryChart" height="250"></canvas>
+            @if (Model.CategorySummary.Any())
+            {
+
+                <table class="table table-bordered table-hover">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Category</th>
+
+                            <th>Total Recipes</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @foreach (var item in Model.CategorySummary)
+                        {
+
+                            <tr>
+
+                                <td>@item.CategoryName</td>
+
+                                <td>@item.RecipeCount</td>
+
+                            </tr>
+
+                        }
+
+                    </tbody>
+
+                </table>
+
+            }
+            else
+            {
+
+                <div class="alert alert-info">
+
+                    No category information available.
+
+                </div>
+
+            }
 
         </div>
 
@@ -110,11 +154,45 @@
 
         <div class="analytics-card">
 
-            <h3>Monthly Recipe Uploads</h3>
+            <h3>System Summary</h3>
 
             <hr />
 
-            <canvas id="recipeChart" height="250"></canvas>
+            <table class="table table-striped">
+
+                <tr>
+
+                    <th>Total Members</th>
+
+                    <td>@Model.TotalUsers</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Total Recipes</th>
+
+                    <td>@Model.TotalRecipes</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Total Categories</th>
+
+                    <td>@Model.TotalCategories</td>
+
+                </tr>
+
+                <tr>
+
+                    <th>Total Favourites</th>
+
+                    <td>@Model.TotalFavourites</td>
+
+                </tr>
+
+            </table>
 
         </div>
 
@@ -130,61 +208,65 @@
 
         <div class="analytics-card">
 
-            <h3>Top Contributors</h3>
+            <h3>Latest Members</h3>
 
             <hr />
 
-            <table class="table table-hover">
+            @if (Model.LatestUsers.Any())
+            {
 
-                <thead>
+                <table class="table table-hover">
 
-                    <tr>
+                    <thead>
 
-                        <th>Member</th>
+                        <tr>
 
-                        <th>Recipes</th>
+                            <th>Name</th>
 
-                    </tr>
+                            <th>Email</th>
 
-                </thead>
+                        </tr>
 
-                <tbody>
+                    </thead>
 
-                    <tr>
+                    <tbody>
 
-                        <td>Nomcebo</td>
+                        @foreach (var user in Model.LatestUsers)
+                        {
 
-                        <td>24</td>
+                            <tr>
 
-                    </tr>
+                                <td>
 
-                    <tr>
+                                    @user.FirstName @user.LastName
 
-                        <td>Sarah</td>
+                                </td>
 
-                        <td>20</td>
+                                <td>
 
-                    </tr>
+                                    @user.Email
 
-                    <tr>
+                                </td>
 
-                        <td>Thando</td>
+                            </tr>
 
-                        <td>18</td>
+                        }
 
-                    </tr>
+                    </tbody>
 
-                    <tr>
+                </table>
 
-                        <td>John</td>
+            }
+            else
+            {
 
-                        <td>15</td>
+                <div class="alert alert-warning">
 
-                    </tr>
+                    No registered users.
 
-                </tbody>
+                </div>
 
-            </table>
+            }
 
         </div>
 
@@ -194,43 +276,57 @@
 
         <div class="analytics-card">
 
-            <h3>Recent Activity</h3>
+            <h3>Latest Recipes</h3>
 
             <hr />
 
-            <ul class="list-group">
+            @if (Model.LatestRecipes.Any())
+            {
 
-                <li class="list-group-item">
+                <table class="table table-hover">
 
-                    ✔ Bunny Chow recipe approved
+                    <thead>
 
-                </li>
+                        <tr>
 
-                <li class="list-group-item">
+                            <th>Recipe</th>
 
-                    ✔ New member registered
+                            <th>Date</th>
 
-                </li>
+                        </tr>
 
-                <li class="list-group-item">
+                    </thead>
 
-                    ✔ Comment removed
+                    <tbody>
 
-                </li>
+                        @foreach (var recipe in Model.LatestRecipes)
+                        {
 
-                <li class="list-group-item">
+                            <tr>
 
-                    ✔ Cape Malay category added
+                                <td>@recipe.Title</td>
 
-                </li>
+                                <td>@recipe.DateCreated.ToShortDateString()</td>
 
-                <li class="list-group-item">
+                            </tr>
 
-                    ✔ Braai recipe featured
+                        }
 
-                </li>
+                    </tbody>
 
-            </ul>
+                </table>
+
+            }
+            else
+            {
+
+                <div class="alert alert-warning">
+
+                    No recipes have been uploaded yet.
+
+                </div>
+
+            }
 
         </div>
 
@@ -244,160 +340,10 @@
 
     <script>
 
-var category = document.getElementById('categoryChart');
-
-new Chart(category, {
-
-    type: 'doughnut',
-
-    data: {
-
-        labels: [
-
-            'Traditional',
-
-            'Braai',
-
-            'Desserts',
-
-            'Cape Malay',
-
-            'Seafood',
-
-            'Street Food'
-
-        ],
-
-        datasets: [{
-
-            data: [
-
-                45,
-
-                35,
-
-                20,
-
-                18,
-
-                15,
-
-                28
-
-            ],
-
-            backgroundColor: [
-
-                '#43A047',
-
-                '#66BB6A',
-
-                '#FFA726',
-
-                '#26A69A',
-
-                '#42A5F5',
-
-                '#EF5350'
-
-            ]
-
-        }]
-
-    },
-
-    options: {
-
-        responsive: true,
-
-        maintainAspectRatio: false
-
-    }
-
-});
-
-var uploads = document.getElementById('recipeChart');
-
-new Chart(uploads, {
-
-    type: 'bar',
-
-    data: {
-
-        labels: [
-
-            'Jan',
-
-            'Feb',
-
-            'Mar',
-
-            'Apr',
-
-            'May',
-
-            'Jun',
-
-            'Jul'
-
-        ],
-
-        datasets: [{
-
-            label: 'Recipes Uploaded',
-
-            data: [
-
-                12,
-
-                24,
-
-                18,
-
-                30,
-
-                28,
-
-                42,
-
-                37
-
-            ],
-
-            backgroundColor: '#43A047'
-
-        }]
-
-    },
-
-    options: {
-
-        responsive: true,
-
-        maintainAspectRatio: false,
-
-        scales: {
-
-            y: {
-
-                beginAtZero: true
-
-            }
-
-        }
-
-    }
-
-});
+        // Chart.js integration with live database data
+        // will be added once your project has
+        // real users and recipes.
 
     </script>
 
 }
-
-
-
-
-
-
-
-

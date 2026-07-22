@@ -1,129 +1,125 @@
-﻿
+﻿@model IEnumerable<SavourSA_Project.Models.ApplicationUser>
+
 @{
-    ViewBag.Title = "Manage Users";
+    ViewBag.Title = "User Management";
     Layout = "~/Views/Shared/AdminLayout.cshtml";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-4">
+<h2>User Management</h2>
 
-    <div>
+<p class="text-muted">
+    View and manage registered members.
+</p>
 
-        <h2 style="font-weight:700;">Manage Members</h2>
+@if (TempData["Success"] != null)
+{
+    <div class="alert alert-success">
 
-        <p class="text-muted">
-            View, edit and manage registered members.
-        </p>
+        @TempData["Success"]
 
     </div>
+}
 
-    <button class="btn btn-success btn-lg">
+@using (Html.BeginForm("Users", "Admin", FormMethod.Get))
+{
+    <div class="row mb-4">
 
-        <i class="fa fa-user-plus"></i>
+        <div class="col-md-5">
 
-        Add Administrator
+            <input type="text"
+                   name="search"
+                   class="form-control"
+                   placeholder="Search users..." />
 
-    </button>
+        </div>
 
-</div>
+        <div class="col-md-2">
 
-<div class="search-box">
+            <button class="btn btn-success">
 
-    <input type="text"
-           placeholder="Search members..." />
+                <i class="fa fa-search"></i>
 
-</div>
+                Search
 
-<div class="mb-4">
-
-    <button class="btn btn-success">All</button>
-
-    <button class="btn btn-default">Members</button>
-
-    <button class="btn btn-default">Administrators</button>
-
-    <button class="btn btn-default">Suspended</button>
-
-</div>
-
-<div class="row">
-    <div class="col-lg-4">
-
-        <div class="user-card">
-
-            <img src="~/Content/Images/Users/user1.png"
-                 class="user-image" />
-
-            <div class="user-body">
-
-                <h3>Nomcebo Mncwabe</h3>
-
-                <p>
-
-                    <i class="fa fa-map-marker"></i>
-
-                    KwaZulu-Natal
-
-                </p>
-
-                <span class="status-active">
-
-                    Member
-
-                </span>
-
-                <hr />
-
-                <p>
-
-                    Joined:
-
-                    15 July 2026
-
-                </p>
-
-                <p>
-
-                    Recipes: 12
-
-                </p>
-
-                <p>
-
-                    Favourites: 28
-
-                </p>
-
-                <div class="text-center">
-
-                    <button class="btn btn-info btn-sm">
-
-                        <i class="fa fa-eye"></i>
-
-                    </button>
-
-                    <button class="btn btn-warning btn-sm">
-
-                        <i class="fa fa-pencil"></i>
-
-                    </button>
-
-                    <button class="btn btn-secondary btn-sm">
-
-                        <i class="fa fa-ban"></i>
-
-                    </button>
-
-                    <button class="btn btn-danger btn-sm">
-
-                        <i class="fa fa-trash"></i>
-
-                    </button>
-
-                </div>
-
-            </div>
+            </button>
 
         </div>
 
     </div>
-</div>
+}
+
+@if (!Model.Any())
+{
+
+    <div class="alert alert-warning">
+
+        No registered users found.
+
+    </div>
+
+}
+else
+{
+
+    <table class="table table-bordered table-hover">
+
+        <thead>
+
+            <tr>
+
+                <th>Name</th>
+
+                <th>Email</th>
+
+                <th>Province</th>
+
+                <th>Joined</th>
+
+                <th width="160">Actions</th>
+
+            </tr>
+
+        </thead>
+
+        <tbody>
+
+            @foreach (var user in Model)
+            {
+
+                <tr>
+
+                    <td>@user.FirstName @user.LastName</td>
+
+                    <td>@user.Email</td>
+
+                    <td>@user.Province</td>
+
+                    <td>@user.CreatedAt.ToShortDateString()</td>
+
+                    <td>
+
+                        <a href="@Url.Action("ViewUser","Admin",new{id=user.Id})"
+                           class="btn btn-info btn-sm">
+
+                            <i class="fa fa-eye"></i>
+
+                        </a>
+
+                        <a href="@Url.Action("DeleteUser","Admin",new{id=user.Id})"
+                           class="btn btn-danger btn-sm">
+
+                            <i class="fa fa-trash"></i>
+
+                        </a>
+
+                    </td>
+
+                </tr>
+
+            }
+
+        </tbody>
+
+    </table>
+
+}

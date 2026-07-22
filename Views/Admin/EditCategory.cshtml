@@ -1,0 +1,77 @@
+﻿
+@model SavourSA_Project.Models.Category
+
+@{
+    ViewBag.Title = "Edit Category";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h2 class="mb-4">
+        <i class="fa fa-pencil"></i>
+        Edit Category
+    </h2>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.HiddenFor(m => m.CategoryId)
+
+        <div class="card p-4 shadow-sm">
+
+            <div class="form-group">
+
+                @Html.LabelFor(m => m.Name)
+
+                @Html.TextBoxFor(m => m.Name,
+                    new { @class = "form-control" })
+
+                @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group mt-3">
+
+                @Html.LabelFor(m => m.Description)
+
+                @Html.TextAreaFor(m => m.Description,
+                    new
+                    {
+                        @class = "form-control",
+                        rows = 4
+                    })
+
+                @Html.ValidationMessageFor(m => m.Description, "", new { @class = "text-danger" })
+
+            </div>
+
+            <hr />
+
+            <button class="btn btn-warning">
+
+                <i class="fa fa-save"></i>
+
+                Update Category
+
+            </button>
+
+            <a href="@Url.Action("Categories","Admin")"
+               class="btn btn-secondary">
+
+                Cancel
+
+            </a>
+
+        </div>
+    }
+
+</div>
+
+@section Scripts{
+
+    @Scripts.Render("~/bundles/jqueryval")
+
+}
+

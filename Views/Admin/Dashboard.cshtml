@@ -14,7 +14,7 @@
             <h2>Welcome back, Administrator 👋</h2>
 
             <p>
-                Manage recipes, categories, users and community activity from one beautiful dashboard.
+                Manage recipes, categories, users and community activity from one dashboard.
             </p>
 
         </div>
@@ -91,13 +91,13 @@
 
             <div>
 
-                <h5>Comments</h5>
+                <h5>Favourites</h5>
 
-                <h2>@Model.TotalComments</h2>
+                <h2>@Model.TotalFavourites</h2>
 
             </div>
 
-            <i class="fas fa-comments fa-3x"></i>
+            <i class="fas fa-heart fa-3x"></i>
 
         </div>
 
@@ -113,29 +113,13 @@
 
             <div class="card-header">
 
-                <h4>Recipe Upload Analytics</h4>
+                <h4>Recipes by Category</h4>
 
             </div>
 
             <div class="card-body">
 
-                <div style="height:320px;
-                            display:flex;
-                            align-items:center;
-                            justify-content:center;
-                            flex-direction:column;">
-
-                    <i class="fas fa-chart-line fa-5x text-success mb-3"></i>
-
-                    <h4>Analytics Coming Soon</h4>
-
-                    <p class="text-muted">
-
-                        Chart.js will display recipe uploads here.
-
-                    </p>
-
-                </div>
+                <canvas id="recipeChart" height="120"></canvas>
 
             </div>
 
@@ -213,7 +197,7 @@
 
             <div class="card-body">
 
-                <table class="table">
+                <table class="table table-hover">
 
                     <thead>
 
@@ -231,59 +215,45 @@
 
                     <tbody>
 
-                        <tr>
+                        @if (Model.RecentRecipes.Any())
+                        {
+                            foreach (var recipe in Model.RecentRecipes)
+                            {
+                                <tr>
 
-                            <td>Umngqusho</td>
+                                    <td>@recipe.Title</td>
 
-                            <td>Traditional</td>
+                                    <td>
 
-                            <td>
+                                        @(recipe.Category != null ? recipe.Category.Name : "No Category")
 
-                                <span class="status-active">
+                                    </td>
 
-                                    Approved
+                                    <td>
 
-                                </span>
+                                        <span class="status-active">
 
-                            </td>
+                                            Available
 
-                        </tr>
+                                        </span>
 
-                        <tr>
+                                    </td>
 
-                            <td>Bunny Chow</td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
 
-                            <td>Street Food</td>
+                                <td colspan="3" class="text-center">
 
-                            <td>
+                                    No recipes uploaded yet.
 
-                                <span class="status-active">
+                                </td>
 
-                                    Approved
-
-                                </span>
-
-                            </td>
-
-                        </tr>
-
-                        <tr>
-
-                            <td>Milk Tart</td>
-
-                            <td>Desserts</td>
-
-                            <td>
-
-                                <span class="status-inactive">
-
-                                    Pending
-
-                                </span>
-
-                            </td>
-
-                        </tr>
+                            </tr>
+                        }
 
                     </tbody>
 
@@ -301,25 +271,31 @@
 
             <div class="card-header">
 
-                <h4>Recent Activity</h4>
+                <h4>Category Summary</h4>
 
             </div>
 
             <div class="card-body">
 
-                <p>👤 Sarah registered.</p>
+                @if (Model.CategorySummary.Any())
+                {
+                    foreach (var item in Model.CategorySummary)
+                    {
+                        <p>
 
-                <hr />
+                            🍽 <strong>@item.CategoryName</strong>
 
-                <p>🍲 New recipe uploaded.</p>
+                            (@item.RecipeCount recipes)
 
-                <hr />
+                        </p>
 
-                <p>💬 Comment reported.</p>
-
-                <hr />
-
-                <p>❤️ Recipe added to favourites.</p>
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <p>No categories available.</p>
+                }
 
             </div>
 
@@ -329,6 +305,95 @@
 
 </div>
 
+@section scripts{
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script>
 
+const labels = [
+@foreach (var item in Model.CategorySummary)
+{
+<text>'@item.CategoryName',</text>
+}
+];
+
+const totals = [
+@foreach (var item in Model.CategorySummary)
+{
+<text>@item.RecipeCount,</text>
+}
+];
+
+const ctx = document.getElementById('recipeChart');
+
+new Chart(ctx, {
+
+    type: 'bar',
+
+    data: {
+
+        labels: labels,
+
+        datasets: [{
+
+            label: 'Recipes',
+
+            data: totals,
+
+            backgroundColor: [
+
+                '#43A047',
+                '#66BB6A',
+                '#FFA726',
+                '#26A69A',
+                '#42A5F5',
+                '#EF5350',
+                '#8E24AA',
+                '#FB8C00'
+
+            ]
+
+        }]
+
+    },
+
+    options: {
+
+        responsive: true,
+
+        maintainAspectRatio: false,
+
+        plugins: {
+
+            legend: {
+
+                display: false
+
+            }
+
+        },
+
+        scales: {
+
+            y: {
+
+                beginAtZero: true,
+
+                ticks: {
+
+                    precision: 0
+
+                }
+
+            }
+
+        }
+
+    }
+
+});
+
+    </script>
+
+}

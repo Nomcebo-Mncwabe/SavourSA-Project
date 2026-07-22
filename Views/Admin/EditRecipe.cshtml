@@ -1,0 +1,113 @@
+﻿
+@model SavourSA_Project.Models.Recipe
+
+@{
+    ViewBag.Title = "Edit Recipe";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Edit Recipe</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(m => m.RecipeId)
+    @Html.HiddenFor(m => m.UserId)
+    @Html.HiddenFor(m => m.DateCreated)
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Title)
+
+        @Html.TextBoxFor(m => m.Title,
+            new { @class = "form-control" })
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Description)
+
+        @Html.TextAreaFor(m => m.Description,
+            new { @class = "form-control", rows = 3 })
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Ingredients)
+
+        @Html.TextAreaFor(m => m.Ingredients,
+            new { @class = "form-control", rows = 5 })
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.LabelFor(m => m.Instructions)
+
+        @Html.TextAreaFor(m => m.Instructions,
+            new { @class = "form-control", rows = 6 })
+
+    </div>
+
+    <div class="form-group">
+
+        @Html.Label("Category")
+
+        @Html.DropDownList("CategoryId",
+            null,
+            "-- Select Category --",
+            new { @class = "form-control" })
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-4">
+
+            @Html.LabelFor(m => m.PrepTime)
+
+            @Html.TextBoxFor(m => m.PrepTime,
+                new { @class = "form-control" })
+
+        </div>
+
+        <div class="col-md-4">
+
+            @Html.LabelFor(m => m.CookTime)
+
+            @Html.TextBoxFor(m => m.CookTime,
+                new { @class = "form-control" })
+
+        </div>
+
+        <div class="col-md-4">
+
+            @Html.LabelFor(m => m.Servings)
+
+            @Html.TextBoxFor(m => m.Servings,
+                new { @class = "form-control" })
+
+        </div>
+
+    </div>
+
+    <br />
+
+    <button class="btn btn-warning">
+
+        Update Recipe
+
+    </button>
+
+    <a href="@Url.Action("Recipes","Admin")"
+       class="btn btn-secondary">
+
+        Cancel
+
+    </a>
+
+}
+

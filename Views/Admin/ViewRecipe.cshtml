@@ -1,0 +1,126 @@
+﻿@model SavourSA_Project.Models.Recipe
+
+@{
+    ViewBag.Title = "Recipe Details";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+
+    <h2 class="mb-4">
+        <i class="fa fa-eye"></i>
+        Recipe Details
+    </h2>
+
+    <div class="card shadow p-4">
+
+        <div class="row">
+
+            <div class="col-md-4 text-center">
+
+                @if (!string.IsNullOrEmpty(Model.ImageUrl))
+                {
+                    <img src="@Url.Content(Model.ImageUrl)"
+                         class="img-responsive img-thumbnail"
+                         style="max-height:300px;" />
+                }
+                else
+                {
+                    <img src="~/Content/Images/Recipes/default-recipe.jpg"
+                         class="img-responsive img-thumbnail"
+                         style="max-height:300px;" />
+                }
+
+            </div>
+
+            <div class="col-md-8">
+
+                <h2>@Model.Title</h2>
+
+                <hr />
+
+                <p>
+
+                    <strong>Category:</strong>
+
+                    @(Model.Category != null ? Model.Category.Name : "None")
+
+                </p>
+
+                <p>
+
+                    <strong>Author:</strong>
+
+                    @(Model.User != null
+                    ? Model.User.FirstName + " " + Model.User.LastName
+                    : "Unknown")
+
+                </p>
+
+                <p>
+
+                    <strong>Date Created:</strong>
+
+                    @Model.DateCreated.ToShortDateString()
+
+                </p>
+
+                <p>
+
+                    <strong>Preparation Time:</strong>
+
+                    @Model.PrepTime mins
+
+                </p>
+
+                <p>
+
+                    <strong>Cooking Time:</strong>
+
+                    @Model.CookTime mins
+
+                </p>
+
+                <p>
+
+                    <strong>Servings:</strong>
+
+                    @Model.Servings
+
+                </p>
+
+            </div>
+
+        </div>
+
+        <hr />
+
+        <h4>Description</h4>
+
+        <p>
+
+            @Model.Description
+
+        </p>
+
+        <h4>Ingredients</h4>
+
+        <pre style="white-space:pre-wrap;">@Model.Ingredients</pre>
+
+        <h4>Instructions</h4>
+
+        <pre style="white-space:pre-wrap;">@Model.Instructions</pre>
+
+        <br />
+
+        <a href="@Url.Action("Recipes","Admin")"
+           class="btn btn-secondary">
+
+            Back
+
+        </a>
+
+    </div>
+
+</div>
+
