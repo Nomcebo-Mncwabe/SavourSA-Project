@@ -10,6 +10,7 @@ namespace SavourSA_Project.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.Title = "SavourSA - Taste the Best of South Africa";
             return View();
         }
 
