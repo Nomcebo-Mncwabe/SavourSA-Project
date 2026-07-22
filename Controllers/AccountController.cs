@@ -69,6 +69,9 @@ namespace SavourSA_Project.Controllers
 
             if (result.Succeeded)
             {
+                // Assign the new user to the Member role
+                await UserManager.AddToRoleAsync(user.Id, "Member");
+
                 var identity = await UserManager.CreateIdentityAsync(
                     user,
                     DefaultAuthenticationTypes.ApplicationCookie

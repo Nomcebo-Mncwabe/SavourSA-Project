@@ -19,42 +19,70 @@ namespace SavourSA_Project.Controllers
         // GET: /Recipe
         // ==========================================
         [AllowAnonymous]
-        public async Task<ActionResult> Index()
+        public async Task<ActionResult> Index(
+     string search,
+     int? categoryId,
+     string sortOrder)
         {
             var recipes = db.Recipes
                 .Include(r => r.Category)
                 .Include(r => r.User)
-                .OrderByDescending(r => r.DateCreated);
+                .AsQueryable();
+
+            // Search by recipe title or ingredients
+            if (!string.IsNullOrWhiteSpace(search))
+            {
+                search = search.Trim();
+
+                recipes = recipes.Where(r =>
+                    r.Title.Contains(search) ||
+                    r.Ingredients.Contains(search));
+            }
+
+            // Filter by category
+            if (categoryId.HasValue)
+            {
+                recipes = recipes.Where(r =>
+                    r.CategoryId == categoryId.Value);
+            }
+
+            // Sort recipes
+            switch (sortOrder)
+            {
+                case "oldest":
+                    recipes = recipes
+                        .OrderBy(r => r.DateCreated);
+                    break;
+
+                case "title":
+                    recipes = recipes
+                        .OrderBy(r => r.Title);
+                    break;
+
+                case "title_desc":
+                    recipes = recipes
+                        .OrderByDescending(r => r.Title);
+                    break;
+
+                default:
+                    recipes = recipes
+                        .OrderByDescending(r => r.DateCreated);
+                    break;
+            }
+
+            ViewBag.Search = search;
+            ViewBag.CategoryId = categoryId;
+            ViewBag.SortOrder = sortOrder;
+
+            ViewBag.Categories = new SelectList(
+                db.Categories.OrderBy(c => c.Name),
+                "CategoryId",
+                "Name",
+                categoryId
+            );
 
             return View(await recipes.ToListAsync());
         }
-
-        // ==========================================
-        // VIEW RECIPE DETAILS
-        // GET: /Recipe/Details/5
-        // ==========================================
-        [AllowAnonymous]
-        public async Task<ActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(
-                    HttpStatusCode.BadRequest);
-            }
-
-            var recipe = await db.Recipes
-                .Include(r => r.Category)
-                .Include(r => r.User)
-                .FirstOrDefaultAsync(r => r.RecipeId == id);
-
-            if (recipe == null)
-            {
-                return HttpNotFound();
-            }
-
-            return View(recipe);
-        }
-
         // ==========================================
         // DISPLAY CREATE RECIPE PAGE
         // GET: /Recipe/Create
