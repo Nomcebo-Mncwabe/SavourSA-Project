@@ -55,8 +55,6 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     <Reference Include="itextsharp, Version=5.5.13.5, Culture=neutral, PublicKeyToken=8354ae6d2174ddca, processorArchitecture=MSIL">
       <HintPath>packages\iTextSharp.5.5.13.5\lib\net461\itextsharp.dll</HintPath>
     </Reference>
@@ -155,6 +153,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform">
+      <HintPath>packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -162,7 +165,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AdminController.cs" />
-    <Compile Include="Controllers\GuestController.cs" />
     <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\FavouriteController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -171,13 +173,37 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202607181628384_InitialCreate.cs" />
-    <Compile Include="Migrations\202607181628384_InitialCreate.Designer.cs">
-      <DependentUpon>202607181628384_InitialCreate.cs</DependentUpon>
+    <Compile Include="Migrations\202607151134009_InitialIdentitySetup.cs" />
+    <Compile Include="Migrations\202607151134009_InitialIdentitySetup.Designer.cs">
+      <DependentUpon>202607151134009_InitialIdentitySetup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202607151142485_InitialCreate.cs" />
+    <Compile Include="Migrations\202607151142485_InitialCreate.Designer.cs">
+      <DependentUpon>202607151142485_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202607151155201_AddRecipeTable.cs" />
+    <Compile Include="Migrations\202607151155201_AddRecipeTable.Designer.cs">
+      <DependentUpon>202607151155201_AddRecipeTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202607151219010_AddCategoryTable.cs" />
+    <Compile Include="Migrations\202607151219010_AddCategoryTable.Designer.cs">
+      <DependentUpon>202607151219010_AddCategoryTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202607151326416_AddFavouriteTable.cs" />
+    <Compile Include="Migrations\202607151326416_AddFavouriteTable.Designer.cs">
+      <DependentUpon>202607151326416_AddFavouriteTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202607201328349_AddUserProfileFields.cs" />
+    <Compile Include="Migrations\202607201328349_AddUserProfileFields.Designer.cs">
+      <DependentUpon>202607201328349_AddUserProfileFields.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\ApplicationDbContext.cs" />
+    <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Favourite.cs" />
     <Compile Include="Models\Recipe.cs" />
-    <Compile Include="Models\SavourSAContext.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\ViewModels\DashboardViewModels.cs" />
     <Compile Include="Models\ViewModels\ProfileViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -254,8 +280,6 @@
     <Content Include="Views\Admin\Reports.cshtml" />
     <Content Include="Views\Admin\Comments.cshtml" />
     <Content Include="Views\Admin\Settings.cshtml" />
-    <Content Include="Views\Guest\Menu.cshtml" />
-    <Content Include="Views\Guest\RecipeDetails.cshtml" />
     <Content Include="Views\Admin\CreateCategory.cshtml" />
     <Content Include="Views\Admin\EditCategory.cshtml" />
     <Content Include="Views\Admin\DeleteCategory.cshtml" />
@@ -301,8 +325,23 @@
     <Content Include="Scripts\jquery-3.7.0.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202607181628384_InitialCreate.resx">
-      <DependentUpon>202607181628384_InitialCreate.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202607151134009_InitialIdentitySetup.resx">
+      <DependentUpon>202607151134009_InitialIdentitySetup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202607151142485_InitialCreate.resx">
+      <DependentUpon>202607151142485_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202607151155201_AddRecipeTable.resx">
+      <DependentUpon>202607151155201_AddRecipeTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202607151219010_AddCategoryTable.resx">
+      <DependentUpon>202607151219010_AddCategoryTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202607151326416_AddFavouriteTable.resx">
+      <DependentUpon>202607151326416_AddFavouriteTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202607201328349_AddUserProfileFields.resx">
+      <DependentUpon>202607201328349_AddUserProfileFields.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -348,13 +387,4 @@
   </Target>
   <Target Name="AfterBuild">
   </Target> -->
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\build\net46\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.props'))" />
-    <Error Condition="!Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\EntityFramework.6.4.4\build\EntityFramework.targets'))" />
-  </Target>
-  <Import Project="packages\EntityFramework.6.4.4\build\EntityFramework.targets" Condition="Exists('packages\EntityFramework.6.4.4\build\EntityFramework.targets')" />
 </Project>
