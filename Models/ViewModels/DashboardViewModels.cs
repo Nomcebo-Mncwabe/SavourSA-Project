@@ -14,5 +14,9 @@ namespace SavourSA_Project.Models.ViewModels
         public int TotalCategories { get; set; }
 
         public int TotalComments { get; set; }
+
+        public int TotalLikes { get; set; }
+        
+
     }
 }
