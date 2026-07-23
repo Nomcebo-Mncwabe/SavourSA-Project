@@ -1,6 +1,6 @@
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
+using System.Collections.Generic;
 
 namespace SavourSA_Project.Models
 {
@@ -12,13 +12,8 @@ namespace SavourSA_Project.Models
         [StringLength(100)]
         public string Title { get; set; }
 
-        // Keep Description (our current project uses this)
         [Required]
         public string Description { get; set; }
-
-        // Keep ShortDescription as well
-        [StringLength(250)]
-        public string ShortDescription { get; set; }
 
         [Required]
         public string Ingredients { get; set; }
@@ -36,18 +31,15 @@ namespace SavourSA_Project.Models
 
         public DateTime DateCreated { get; set; } = DateTime.Now;
 
-        // Category relationship
+        // Foreign Key to Category
         public int CategoryId { get; set; }
 
         public virtual Category Category { get; set; }
 
-        // User relationship
+        // Foreign Key to User
         public string UserId { get; set; }
 
         public virtual ApplicationUser User { get; set; }
-
-        // Keep compatibility with teammate's property
-        public string CreatedByUserId { get; set; }
 
         public virtual ICollection<Favourite> Favourites { get; set; }
     }
